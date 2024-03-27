@@ -23,7 +23,7 @@ Annotations are collected from Gaze information from TOBI glass2
     <li>Modify the script paths (video path, bounding box path, etc.) to match your file locations.</li>
     <li>Open a terminal or command prompt.</li>
     <li>Navigate to the directory containing the script.</li>
-    <li>Run the script by typing <code>python script_name.py</code>, replacing <code>script_name.py</code> with the name of your script file.</li>
+    <li>Run the script by typing <code>python saveFramefrvideo.py</code>, replacing <code>saveFramefrvideo.py</code> with the name of your script file.</li>
     <li>The script will create directories for extracted frames and visualized frames, and it will process the video and bounding box data accordingly.</li>
 </ol>
 
