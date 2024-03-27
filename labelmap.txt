@@ -1,0 +1,4 @@
+Bowl 0
+CanOfCocaCola 1
+MilkBottle 3
+Mug 4
