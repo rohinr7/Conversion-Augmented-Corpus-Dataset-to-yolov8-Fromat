@@ -5,8 +5,8 @@ Annotations are collected from Gaze information from TOBI glass2
 <!DOCTYPE html>
 <html lang="en">
 <body>
-<h1>How to Run the Script</h1>
-<p>This guide will help you run the Python script designed for extracting frames from a video and visualizing bounding boxes on those frames.</p>
+<h1>Visualizing BBox from the Grasping-in-the-wild dataset</h1>
+<p>This guide will help you run the Python script designed for extracting frames from a video and visualizing bounding boxes on those frames. The bounding box where given in the seperate folder for each frame which was obtained from the Gaze information observed form TobiGlass2 </p>
 
 <h2>Prerequisites</h2>
 <ul>
