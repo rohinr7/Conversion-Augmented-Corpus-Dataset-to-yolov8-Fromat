@@ -29,5 +29,32 @@ Annotations are collected from Gaze information from TOBI glass2
 
 <h2>Understanding the Output</h2>
 <p>After running the script, you will find two new directories containing the extracted frames and the visualized frames. The visualized frames will include bounding boxes drawn over the objects of interest as specified in your bounding box file.</p>
+
+<h1>Guide for YOLOv8 Format Conversion Script</h1>
+<p>This document provides instructions on how to use the script designed for converting bounding box annotations into the YOLOv8 format. This is particularly useful for preparing datasets for object detection models.</p>
+
+<h2>Script Description</h2>
+<p>The script reads images and their corresponding bounding box annotations, converts these bounding boxes to the YOLOv8 format (normalized x_center, y_center, width, and height), and then saves each image and its new annotation in designated directories.</p>
+
+<h2>Steps to Run the Script</h2>
+<ol>
+    <li>Ensure all prerequisites are met: Python, OpenCV, and your dataset are ready.</li>
+    <li>Adjust the script paths for images, bounding boxes, YOLOv8 formatted images, and annotation directories to your specific directory structure.</li>
+    <li>Open a terminal or command prompt.</li>
+    <li>Navigate to the directory containing the conversion script.</li>
+    <li>Execute the script by typing <code>python conversiondata_yolov8.py</code>, where <code>conversiondata_yolov8.py</code> is the name of your Python script. change the path of dataset directories in your script</li>
+    <li>The script will process each image and its annotation, saving the results in the specified YOLOv8 format directories.</li>
+</ol>
+
+<h2>Understanding the Output</h2>
+<p>Upon completion, the script outputs two main types of files in separate directories:
+    <ul>
+        <li><strong>Images:</strong> Copies of the original images, potentially with visualized bounding boxes if specified.</li>
+        <li><strong>Annotations:</strong> Text files in YOLOv8 format corresponding to each image, containing normalized bounding box coordinates and class identifiers.</li>
+    </ul>
+</p>
+
+<p>This conversion is essential for training object detection models using the YOLOv8 algorithm, facilitating a standardized approach to dataset preparation.</p>
+
 </body>
 </html>
