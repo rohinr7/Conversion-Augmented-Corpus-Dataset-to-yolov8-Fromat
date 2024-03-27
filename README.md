@@ -4,8 +4,8 @@ Annotations are collected from Gaze information from TOBI glass2
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>How to Run the Script</title>
+<meta charset="UTF-8">
+<title>How to Run the Script</title>
 </head>
 <body>
 <h1>How to Run the Script</h1>
