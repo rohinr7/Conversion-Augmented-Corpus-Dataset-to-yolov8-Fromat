@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+
 # Conversion-Augmented-Corpus-Dataset-to-yolov8-Fromat
 Annotations are collected from Gaze information from TOBI glass2
 
-
-<meta charset="UTF-8">
-<title>How to Run the Script</title>
-</head>
+<!DOCTYPE html>
+<html lang="en">
 <body>
 <h1>How to Run the Script</h1>
 <p>This guide will help you run the Python script designed for extracting frames from a video and visualizing bounding boxes on those frames.</p>
