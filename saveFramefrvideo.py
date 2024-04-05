@@ -1,5 +1,6 @@
 import cv2
 import os
+import re
 
 
 def make_dir(directory):
@@ -93,18 +94,49 @@ def visualize_frame(bounding_box_path,extract_frame,saving_path):
                 # cv2.waitKey(122)
 
 
+def get_paths(path_for_class,bbpath):
+    path_for_dirs = os.listdir(path_for_class)
+    for path in path_for_dirs:
+        fullpath = os.path.join(path_for_class, path)
+        # Extract place number using regular expression
+        place_number_match = re.search(r'Place(\d+)', fullpath)
+        place_number = place_number_match.group(1) if place_number_match else None
+
+        # Extract subject number using regular expression
+        subject_number_match = re.search(r'Subject(\d+)', fullpath)
+        subject_number = subject_number_match.group(1) if subject_number_match else None
+
+        extractpath = fullpath + "/extract_frame"
+        make_dir(extractpath)
+        save_frame(f"{fullpath}/{path}.mp4",extractpath)
+        #save_frame(f"C:/Users/rohin/Desktop/New folder (2)/trdp/datasets/MilkBottle/MilkBottle/MilkBottlePlace{place_number}Subject{subject_number}\MilkBottlePlace{place_number}Subject{subject_number}.mp4", extractpath)
+        visualizepath = fullpath + "/visualize_frames"
+        make_dir(visualizepath)
+
+        bounding_box_path =f"{bbpath}/{path}/bounding_box_new.txt"
+        visualize_frame(bounding_box_path, extractpath, visualizepath)
+        print(f"progress for {path} is finished!")
+
+
+
+
 
 
 
 if __name__ == '__main__':
-    path_for_class = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\Bowl\Bowl\BowlPlace7Subject3"
-    extractpath = path_for_class + "/extract_frame"
-    make_dir(extractpath)
-    save_frame(r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\Bowl\Bowl\BowlPlace7Subject3\BowlPlace7Subject3.mp4" , extractpath)
-    visualizepath = path_for_class + "/visualize_frames"
-    make_dir(visualizepath)
-    bounding_box_path = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\BoundingBoxes\BoundingBoxes\Bowl\BowlPlace7Subject3\bounding_box_new.txt"
-    visualize_frame(bounding_box_path,extractpath, visualizepath)
+    path_for_class = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\Mug\Mug"
+    bounding_box_path = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\BoundingBoxes\BoundingBoxes\Mug"
+    get_paths(path_for_class,bounding_box_path)
+
+
+
+    # extractpath = path_for_class + "/extract_frame"
+    # make_dir(extractpath)
+    # save_frame(r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\MilkBottle\MilkBottle\MilkBottlePlace7Subject3\MilkBottlePlace7Subject3.mp4" , extractpath)
+    # visualizepath = path_for_class + "/visualize_frames"
+    # make_dir(visualizepath)
+    # bounding_box_path = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\BoundingBoxes\BoundingBoxes\MilkBottle\MilkBottlePlace7Subject3\bounding_box_new.txt"
+    # visualize_frame(bounding_box_path,extractpath, visualizepath)
 
 
 

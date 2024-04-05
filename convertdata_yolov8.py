@@ -2,6 +2,7 @@
 
 import cv2
 import os
+import re
 
 classes = ['Bowl','CanOfCocaCola', 'MilkBottle', 'Mug']
 
@@ -69,25 +70,42 @@ def main(path_to_images, path_to_boundingbox,place_no, subject_no ,yolo_img_path
             if img_file == frame_name:
                 image_path = os.path.join(path_to_images, img_file)
                 frame = cv2.imread(image_path)
-
+                saveframe(frame, classid, yolo_img_path, frame_no, place_no, subject_no)
+                savetxt(classid, frame, frame_no, bbox, annotation_path, place_no, subject_no)
                 if Visualize_img is True:
                     frame = visualize_image(frame, bbox)
                     cv2.imshow('Bounding Box', frame)
                     cv2.waitKey(122)
 
-                saveframe(frame ,classid, yolo_img_path,frame_no, place_no, subject_no)
-                savetxt(classid ,frame,frame_no,bbox,annotation_path,place_no, subject_no)
-
-
                 frame_no = frame_no + 1
 
+def run_main(path_for_class,bbpath, yolo_img_path, annotation_path, class_id):
+    path_for_dirs = os.listdir(path_for_class)
+    print(path_for_dirs)
+    for path in path_for_dirs:
+        extracted_frames_1 = os.path.join(path_for_class,path)
 
+        place_number_match = re.search(r'Place(\d+)', extracted_frames_1)
+        place_number = place_number_match.group(1) if place_number_match else None
 
+        # Extract subject number using regular expression
+        subject_number_match = re.search(r'Subject(\d+)', extracted_frames_1)
+        subject_number = subject_number_match.group(1) if subject_number_match else None
+
+        extracted_frames = extracted_frames_1 + "\extract_frame"
+        bounding_box_path = f"{bbpath}/{path}/bounding_box_new.txt"
+        main(extracted_frames, bounding_box_path, place_number, subject_number, yolo_img_path, annotation_path, class_id, Visualize_img=True)
 
 if __name__ == '__main__':
-    path_to_images = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\Bowl\Bowl\BowlPlace7Subject3\extract_frame"
-    bounding_box_path =r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\BoundingBoxes\BoundingBoxes\Bowl\BowlPlace7Subject3\bounding_box_new.txt"
+    #path_to_images = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\MilkBottle\MilkBottle\MilkBottlePlace7Subject3\extract_frame"
+    path_to_images = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\Mug\Mug"
+    bounding_box_path = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\BoundingBoxes\BoundingBoxes\Mug"
+
     yolo_img_path = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\yolov8_format\images"
     annotation_path = r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\yolov8_format\annotations"
-    classid=0
-    main(path_to_images,bounding_box_path,7,3,yolo_img_path, annotation_path, classid,Visualize_img=True)
+    classid = 3
+    #main(path_to_images, bounding_box_path, 7, 3, yolo_img_path, annotation_path, classid, Visualize_img=True)
+
+    run_main(path_to_images,bounding_box_path, yolo_img_path, annotation_path, class_id=classid)
+
+    # bounding_box_path =r"C:\Users\rohin\Desktop\New folder (2)\trdp\datasets\BoundingBoxes\BoundingBoxes\MilkBottle\MilkBottlePlace7Subject3\bounding_box_new.txt"
